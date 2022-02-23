@@ -12,7 +12,7 @@ from login.permissions import get_permissions
 from emstrack.latlon import calculate_orientation
 
 from .models import Ambulance, AmbulanceUpdate, Call, Location, AmbulanceCall, Patient, CallStatus, Waypoint, \
-    LocationType, CallPriorityClassification, CallPriorityCode, CallRadioCode, CallNote
+    LocationType, CallPriorityClassification, CallPriorityCode, CallRadioCode, CallNote, AmbulanceMessage
 
 logger = logging.getLogger(__name__)
 
@@ -673,3 +673,27 @@ class CallSummarySerializer(serializers.ModelSerializer):
                   'patient_set',
                   'callnote_set']
         read_only_fields = ['created_at', 'updated_by', 'callnote_set']
+
+
+
+
+
+
+
+
+
+class AmbulanceMessageSerializer(serializers.ModelSerializer):
+
+    ambulance_id = serializers.PrimaryKeyRelatedField(queryset=Ambulance.objects.all(), read_only=False)
+    text = serializers.CharField(required=True, max_length=500)
+    user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), read_only=False)
+
+    class Meta:
+        model = AmbulanceMessage
+        fields = ['id',
+                  'ambulance_id',
+                  'text', 
+                  'user_id',
+                  'comment', 'updated_by', 'updated_on']
+        read_only_fields = ('id', 'updated_by')
+

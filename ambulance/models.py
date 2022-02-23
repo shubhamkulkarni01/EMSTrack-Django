@@ -824,3 +824,37 @@ class Region(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+
+
+
+class AmbulanceMessage(PublishMixin,
+                    UpdatedByModel):
+
+    # message text
+    text = models.CharField(_('ambulance message'), max_length=500)
+
+    # ambulance
+    ambulance = models.ForeignKey(Ambulance,
+                                  on_delete=models.CASCADE,
+                                  verbose_name=_('ambulance'))
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                                  verbose_name=_('user'))
+
+    def save(self, *args, **kwargs):
+
+        # call super
+        super().save(*args, **kwargs)
+
+    def publish(self, **kwargs):
+
+        # publish to mqtt
+        # from mqtt.publish import SingletonPublishClient
+        # SingletonPublishClient().publish_call_status(self, **kwargs)

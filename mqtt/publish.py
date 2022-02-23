@@ -211,3 +211,15 @@ class SingletonPublishClient(PublishSingle):
     def remove_call_status(self, ambulancecall):
         self.remove_topic('ambulance/{}/call/{}/status'.format(ambulancecall.ambulance_id,
                                                                ambulancecall.call_id))
+
+
+
+
+
+
+    def publish_ambulance_message(self, ambulancecall, qos=2, retain=False):
+        self.publish_topic('ambulance/{}/message'.format(ambulancecall.ambulance_id),
+                           ambulancecall.text,
+                           qos=qos,
+                           retain=retain)
+
