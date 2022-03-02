@@ -1768,32 +1768,37 @@ function createCategoryPanesAndFilters() {
     settings.ambulance_status_order.forEach(function (status) {
 
         // Create grid
-        $("#ambulance-status").append(
-            '<div class="card form-group mb-1 mt-0" id="ambulance-card-' + status + '">\n' +
-            '    <div class="card-header px-1 pb-0 pt-1"\n' +
-            '         id="ambulance-heading-' + status + '">\n' +
-            '         <h6 style="cursor: pointer;"\n' +
-            '             data-toggle="collapse"\n' +
-            '             data-target="#ambulance-' + status + '"\n' +
-            '             aria-expanded="true" aria-controls="ambulance-' + status + '">\n' +
-            '             <input class="filter-checkbox" value="status" data-status="' + status + '"\n' +
-            '                    type="checkbox" id="ambulance-checkbox-' + status + '" ' +
-            (visibleCategory[status] ? 'checked' : '') + '>\n' +
-            '             <span id="ambulance-' + status + '-header" role="button">' +
-            '                    ' + settings.ambulance_status[status] + '\n' +
-            '             </span>\n' +
-            '             <span id="ambulance-' + status + '-header-count" class="badge badge-primary"></span>\n' +
-            '          </h6>\n' +
-            '    </div>\n' +
-            '    <div class="collapse"\n' +
-            '         id="ambulance-' + status + '"\n' +
-            '         aria-labelledby="ambulance-heading-' + status + '">\n' +
-            '         <div class="card-body py-1 px-0"\n' +
-            '              id="ambulance-grid-' + status + '">\n' +
-            '         </div>\n' +
-            '    </div>\n' +
-            '</div>');
-            //'         data-parent="#ambulance-status">\n' +
+        $("#ambulance-status").append(`
+            <div class="card form-group mb-1 mt-0" id="ambulance-card-${status}">
+                <div class="card-header px-1 pb-1 pt-1"
+                     id="ambulance-heading-${status}">
+                     <h6 style="display:flex; align-items:center; margin-bottom: 0;">
+                        <label style="margin-bottom: 0">
+                            <input type="checkbox" class="filter-checkbox" value="status">
+                            <span class="material-icons visibility">visibility</span>
+                            <span class="material-icons visibility_off">visibility_off</span>
+                        </label>
+                        <span class="label">${settings.ambulance_status[status]}</span>
+                        <span id="ambulance-${status}-header-count" class="badge badge-primary"></span>
+                        <div style="flex-grow: 1"></div>
+                        <span class="card-toggle collapsed" style="cursor: pointer; font-size: 1.2rem"
+                            data-toggle="collapse"
+                            data-target="#ambulance-${status}"
+                            aria-expanded="false" aria-controls="ambulance-${status}">
+                            <span class="material-icons plus">add</span>
+                            <span class="material-icons minus">remove</span>
+                        </span>
+                    </h6>
+                </div>
+                <div class="collapse"
+                     id="ambulance-${status}"
+                     aria-labelledby="ambulance-heading-${status}">
+                     <div class="card-body py-1 px-0"
+                          id="ambulance-grid-${status}"
+                     </div>
+                </div>
+            </div>
+            `);
 
         // Make them dropable
         $('#ambulance-card-' + status)

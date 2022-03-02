@@ -158,3 +158,29 @@ button:focus {
 #right-side-bar-dispatch-icon, #right-side-bar-dispatch-icon-active {
 	vertical-align: -.125em;
 }
+
+span.label {
+	margin-left: 0.5rem;
+}
+#ambulance-tab-content input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox] ~ span {
+	padding:3px;
+	font-size: 1rem;
+}
+.visibility,input[type=checkbox]:checked ~ .visibility_off {
+	display: none;
+}
+.visibility_off,input[type=checkbox]:checked ~ .visibility {
+	display:inline-block;
+}
+
+.card-toggle .minus,
+.card-toggle.collapsed .plus {
+    display: inline-block;
+}
+.card-toggle .plus,
+.card-toggle.collapsed .minus {
+    display: none;
+}
